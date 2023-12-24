@@ -1,0 +1,118 @@
+To pull code from a private GitHub repository in Jenkins using a personal access token, you can follow these general steps. This assumes that you have Jenkins installed and configured on your server:
+
+1. Create a Personal Access Token on GitHub:
+   a. Log in to your GitHub account.
+   b. Go to "Settings" -> "Developer settings" -> "Personal access tokens" on GitHub.
+   c. Click on "Generate token" and provide the necessary permissions for accessing your private repositories.
+   d. Copy the generated token.
+
+2. Install GitHub Plugin in Jenkins:
+   a. In Jenkins, navigate to "Manage Jenkins" -> "Manage Plugins."
+   b. Install the "GitHub Plugin" if you haven't already. This plugin provides integration with GitHub repositories.
+
+3. Configure GitHub Credentials in Jenkins:
+   a. In Jenkins, navigate to "Manage Jenkins" -> "Manage Credentials."
+   b. Click on "(global)" under "Stores scoped to Jenkins" and then "Add Credentials."
+   c. Choose "Username and Password" for the Kind.
+   d. Enter your preffered username as the ID and paste the personal access token you generated earlier as the Password.
+   e. Save the credentials.
+
+
+## Creating a Freestyle Jenkins project for a GitHub repository involves several steps. Here's a step-by-step guide:
+
+Prerequisites:
+Jenkins Installed: Ensure that Jenkins is installed and running on your server. You should have administrative access to Jenkins.
+
+GitHub Account: Make sure you have a GitHub account, and you have the necessary permissions to access the repository.
+
+Steps:
+
+1. Install GitHub Plugin:
+   a. In Jenkins, navigate to "Manage Jenkins" -> "Manage Plugins."
+   b. Install the "GitHub Plugin."
+
+2. Create a New Jenkins Job:
+   a. Click on "New Item" on the Jenkins dashboard.
+   b. Enter a name for your project and select "Freestyle project."
+   c. Click "OK" to create the project.
+   d. Configure General Settings:
+
+3. In the project configuration page, you can configure general settings such as the project name, description, and other options.
+   I.Source Code Management:
+     a. Under the "Source Code Management" section, select "Git."
+     b. Enter the URL of your GitHub repository (e.g., https://github.com/your-username/your-repo.git).
+
+     NOTE: If you are pullin code from private GitHub private repository, then provide the credentials 
+
+4. If your repository is private, specify the credentials you created earlier.
+   I. Build Triggers:
+       a. Under the "Build Triggers" section, check the box for "GitHub hook trigger for GITScm polling." This option will trigger 
+          the build whenever there's a change in the GitHub repository.
+
+5. Build Environment (Optional):
+   I. Configure build environment settings if needed. For a simple Freestyle project, this might not be necessary.
+        a. Build:
+           ** Under the "Build" section, add build steps based on your project requirements. This could include shell commands, 
+              script execution, or any other build-related tasks.
+
+6. Post-build Actions (Optional):
+   a. Configure post-build actions if needed. For example, you might want to archive artifacts, send notifications, or deploy the application.
+
+7. Save the Configuration:
+   ** Click "Save" to save the project configuration.
+
+8. Run the Build:
+   ** Manually trigger the build by clicking "Build Now" on the project dashboard.
+
+9. Verify Build Results:
+   ** Check the console output and build history to ensure that the build is successful.
+
+### Now, your Freestyle Jenkins project is configured to pull code from your GitHub repository and perform the specified build steps. 
+    Keep in mind that Freestyle projects are suitable for simple build tasks, and for more complex workflows, you might consider using Jenkins Pipelines.
+
+## How to push changes in code in one branch to another on GitHub through Jenkins:
+
+Steps:
+ 
+1. Install the Git Plugin:
+   a. In Jenkins, navigate to "Manage Jenkins" -> "Manage Plugins."
+   b. Install the "Git Plugin" if you haven't already.
+
+2. Configure Git Repository in the Jenkins Job:
+   a. Create a new or open an existing Jenkins job.
+   b. In the job configuration, under the "Source Code Management" section, select "Git."
+   c. Enter the URL of your Git repository.
+   d. If your repository is private, configure the credentials to access it.
+
+3. Configure the Build Steps:
+   a. Configure the necessary build steps based on your project requirements.
+
+4. Add Post-Build Action - Git Publisher:
+   a. Scroll down to the "Post-build Actions" section.
+   b. Click on the "Add post-build action" dropdown and select "Git Publisher."
+
+5. Configure Git Publisher Settings:
+   a. In the "Git Publisher" section, you will find options to configure the push settings.
+   b. Check the box for "Push Only If Build Succeeds" if you want to push changes only when the build is successful.
+   c. Under "Branches," you can specify the branches you want to push to. For example, if you want to push to the master branch, enter refs/heads/master.
+   d. In the "Target remote name," enter the remote name (usually "origin") to which changes should be pushed.
+   e. If you want to push tags, check the box for "Tag to push."
+   f. Specify the target remote tag name if you want to push tags.
+   g. Save the configuration.
+
+6. Run the Build:
+   *** Save your Jenkins job configuration and manually trigger a build.
+
+7. Verify the Push:
+   *** Check the build console output for any Git push-related messages to ensure that the push operation was successful.
+
+That's it! Now, after a successful build, Jenkins will push changes to the specified branches or tags in your Git repository. 
+Make sure you have the necessary permissions and credentials configured for the Git repository.
+
+
+
+
+
+
+
+
